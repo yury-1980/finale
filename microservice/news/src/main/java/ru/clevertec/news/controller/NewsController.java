@@ -1,6 +1,7 @@
 package ru.clevertec.news.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/news")
 public class NewsController {
 
+    @Value("${eureka.instance.instance-id}")
+    private String uuid;
+
     @GetMapping
     public String getNews() {
-        return "привет";
+        return "привет - " + uuid;
     }
 }
