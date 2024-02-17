@@ -1,45 +1,8 @@
 server:
   port: 8765
-
+# считывание настроек с помощью spring cloud config
 spring:
   application:
     name: gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      routes:
-        - id: news
-          uri: lb://news
-          predicates:
-            - Path=/news
-#            - Method=GET
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-logging:
-  pattern:
-    console: '[%-5level] %d{HH:mm:ss} - %msg%n'
-
-#spring:
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lower-case-service-id: true
-
-#spring:
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: news
-#          uri: lb://news
-#          predicates:
-#            - Path=/news
-#            - Method=GET
+  config:
+    import: optional:configserver:http://localhost:8888
